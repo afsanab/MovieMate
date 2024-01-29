@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MovieMate</title>
+</head>
+<body>
+    <h1>Movie Recommender</h1>
+
+    <h2>Top Rated Movies</h2>
+    <ul>
+    {% for movie in top_movies %}
+        <li>{{ movie.title }}</li>
+    {% endfor %}
+    </ul>
+    
+    <!-- Your existing form and other HTML content -->
+
+</body>
+</html>
