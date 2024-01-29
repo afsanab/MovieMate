@@ -10,7 +10,7 @@
     <h1>Top 20 Rated Movies</h1>
     <ol>
         {% for movie in top_movies %}
-        <li>{{ movie.original_title }} (Rating: {{ movie.vote_average }})</li>
+        <li>{{ movie['original_title'] }} (Rating: {{ movie['vote_average'] }})</li>
         {% endfor %}
     </ol>
 </body>
