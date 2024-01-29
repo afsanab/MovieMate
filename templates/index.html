@@ -7,12 +7,16 @@
 </head>
 
 <body>
-    <h1>Top 20 Rated Movies</h1>
-    <ol>
+    <h1>Select Movies for Recommendations</h1>
+    <form action="/recommend" method="post">
         {% for movie in top_movies %}
-        <li>{{ movie['original_title'] }} (Rating: {{ movie['vote_average'] }})</li>
+        <div>
+            <input type="checkbox" name="movies" value="{{ movie.original_title }}">
+            {{ movie.original_title }}
+        </div>
         {% endfor %}
-    </ol>
+        <input type="submit" value="Get Recommendations">
+    </form>
 </body>
 
 </html>

@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Recommendations</title>
+    <meta charset="UTF-8">
+    <title>Movie Recommendations</title>
 </head>
+
 <body>
     <h1>Recommended Movies</h1>
     <ul>
         {% for movie in recommendations %}
-            <li>{{ movie }}</li>
+        <li>{{ movie }}</li>
         {% endfor %}
     </ul>
+    <a href="/">Back to movie list</a>
 </body>
+
 </html>

@@ -41,5 +41,12 @@ def index():
     top_movies = get_top_rated_movies('data/movies_metadata.csv')
     return render_template('index.html', top_movies=top_movies)
 
+@app.route('/recommend', methods=['POST'])
+def recommend():
+    selected_movies = request.form.getlist('movies')
+    # Add your logic here to generate recommendations based on selected_movies
+    #recommendations = your_recommendation_function(selected_movies)
+    #return render_template('recommendations.html', recommendations=recommendations)
+
 if __name__ == '__main__':
     app.run(debug=True)
