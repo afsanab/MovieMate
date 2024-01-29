@@ -88,7 +88,6 @@ def index():
     genres = extract_genres('data/movies_metadata.csv')
     return render_template('index.html', top_movies=top_movies, genres=genres)
 
-
 @app.route('/recommend', methods=['POST'])
 def recommend():
     selected_movies = request.form.getlist('movies')
