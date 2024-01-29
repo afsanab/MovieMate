@@ -36,7 +36,6 @@ def get_top_rated_movies(file_path, top_n=20):
 
     return top_movies_list
 
-
 @app.route('/')
 def index():
     top_movies = get_top_rated_movies('data/movies_metadata.csv')
