@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>MovieMate</title>
+    <meta charset="UTF-8">
+    <title>Top Rated Movies</title>
 </head>
+
 <body>
-    <h1>Movie Recommender</h1>
-
-    <h2>Top Rated Movies</h2>
-    <ul>
-    {% for movie in top_movies %}
-        <li>{{ movie.title }}</li>
-    {% endfor %}
-    </ul>
-    
-    <!-- Your existing form and other HTML content -->
-
+    <h1>Top 20 Rated Movies</h1>
+    <ol>
+        {% for movie in top_movies %}
+        <li>{{ movie['original_title'] }} (Rating: {{ movie['vote_average'] }})</li>
+        {% endfor %}
+    </ol>
 </body>
+
 </html>
