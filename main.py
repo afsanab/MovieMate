@@ -58,6 +58,30 @@ def extract_genres(file_path):
 
     return sorted(genres)  # Return a sorted list of unique genres
 
+def recommend_movies_by_genre(genre, file_path, top_n=10):
+    # Load the dataset
+    movies_df = pd.read_csv(file_path)
+
+    # Function to parse genres and check if the selected genre is in the movie's genres
+    def is_genre_present(genres_str, selected_genre):
+        try:
+            genres = json.loads(genres_str.replace("'", '"'))
+            for g in genres:
+                if g['name'] == selected_genre:
+                    return True
+        except json.JSONDecodeError:
+            return False
+        return False
+
+    # Filter movies by the selected genre
+    movies_df['is_genre'] = movies_df['genres'].apply(lambda x: is_genre_present(x, genre))
+    genre_movies_df = movies_df[movies_df['is_genre']]
+
+    # Assuming you want to recommend the highest-rated movies in the selected genre
+    top_movies = genre_movies_df[['original_title', 'vote_average']].sort_values(by='vote_average', ascending=False).head(top_n)
+
+    return top_movies.to_dict('records')
+
 @app.route('/')
 def index():
     top_movies = get_top_rated_movies('data/movies_metadata.csv')
@@ -68,9 +92,9 @@ def index():
 @app.route('/recommend', methods=['POST'])
 def recommend():
     selected_movies = request.form.getlist('movies')
-    # Add your logic here to generate recommendations based on selected_movies
-    #recommendations = your_recommendation_function(selected_movies)
-    #return render_template('recommendations.html', recommendations=recommendations)
+    preferred_genre = request.form['genre']
+    recommendations = recommend_movies_by_genre(preferred_genre, 'data/movies_metadata.csv')
+    return render_template('recommendations.html', recommendations=recommendations)
 
 if __name__ == '__main__':
     app.run(debug=True)
