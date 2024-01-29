@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Top Rated Movies</title>
 </head>
-
 <body>
     <h1>Select Movies for Recommendations</h1>
     <form action="/recommend" method="post">
         {% for movie in top_movies %}
-        <div>
-            <input type="checkbox" name="movies" value="{{ movie.original_title }}">
-            {{ movie.original_title }}
-        </div>
+            <div>
+                <input type="checkbox" name="movies" value="{{ movie.original_title }}">
+                {{ movie.original_title }}
+            </div>
         {% endfor %}
+        
+        <div>
+            <label for="genre">What are you in the mood for?</label>
+            <select name="genre" id="genre">
+                {% for genre in genres %}
+                    <option value="{{ genre }}">{{ genre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
         <input type="submit" value="Get Recommendations">
     </form>
 </body>
-
 </html>

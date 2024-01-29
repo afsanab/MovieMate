@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import pandas as pd
+import json
 
 app = Flask(__name__)
 
@@ -36,10 +37,33 @@ def get_top_rated_movies(file_path, top_n=20):
 
     return top_movies_list
 
+def extract_genres(file_path):
+    # Load the dataset
+    movies_df = pd.read_csv(file_path)
+
+    # Initialize an empty set to store unique genres
+    genres = set()
+
+    # Iterate over each row and extract genres
+    for genre_list in movies_df['genres']:
+        try:
+            # Parse the genre string into a list
+            genre_dicts = json.loads(genre_list.replace("'", '"'))
+
+            # Add each genre to the set
+            for genre in genre_dicts:
+                genres.add(genre['name'])
+        except json.JSONDecodeError:
+            continue  # Skip rows where the genre data is not properly formatted
+
+    return sorted(genres)  # Return a sorted list of unique genres
+
 @app.route('/')
 def index():
     top_movies = get_top_rated_movies('data/movies_metadata.csv')
-    return render_template('index.html', top_movies=top_movies)
+    genres = extract_genres('data/movies_metadata.csv')
+    return render_template('index.html', top_movies=top_movies, genres=genres)
+
 
 @app.route('/recommend', methods=['POST'])
 def recommend():
