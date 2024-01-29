@@ -58,6 +58,7 @@ def extract_genres(file_path):
 
     return sorted(genres)  # Return a sorted list of unique genres
 
+
 def recommend_movies_by_genre(genre, file_path, top_n=10):
     # Load the dataset
     movies_df = pd.read_csv(file_path)
