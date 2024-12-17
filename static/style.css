@@ -1,0 +1,154 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #260101;
+    /* Dark text */
+    background-color: #D9B991;
+    /* Light background */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+h1,
+h2 {
+    color: #400106;
+    /* Dark red headings */
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* Containers */
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 5%;
+    box-sizing: border-box;
+    background-color: #D9B991;
+    /* Match background */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Movie Items */
+.movie-item {
+    display: inline-block;
+    margin: 0 10px 20px;
+    border-radius: 8px;
+    background-color: #402814;
+    /* Rich brown */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+.movie-item img {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    width: 100%;
+}
+
+/* Hide the actual checkbox */
+.movie-item input[type="checkbox"] {
+    display: none;
+}
+
+/* Selected Movie Item */
+.movie-item.selected {
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.7);
+    border: 3px solid #400106;
+    /* Highlight with dark red */
+    transform: translateY(-5px);
+}
+
+/* Hover Effect */
+.movie-item:hover {
+    transform: translateY(-5px);
+    border: 2px solid #0D0C00;
+}
+
+/* Buttons */
+button,
+.back-button {
+    padding: 10px 25px;
+    background-color: #402814;
+    /* Dark brown */
+    color: #D9B991;
+    /* Light text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover,
+.back-button:hover {
+    background-color: #400106;
+    /* Dark red on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Dropdown */
+select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #0D0C00;
+    background-color: #D9B991;
+    color: #260101;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+select:focus {
+    border-color: #400106;
+}
+
+/* Back Button */
+.back-button {
+    display: inline-block;
+    text-decoration: none;
+}
+
+/* General Links */
+a {
+    color: #260101;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #400106;
+}
+
+/* Recommendation Items - Same Layout as Movie Items */
+.recommendation-item {
+    display: inline-block;
+    margin: 0 10px 20px;
+    border-radius: 8px;
+    background-color: #402814;
+    /* Brown background */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    overflow: hidden;
+}
+
+.recommendation-item img {
+    width: 100%;
+    max-width: 250px;
+    /* Matches movie-item */
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.recommendation-item:hover {
+    transform: translateY(-5px);
+    border: 2px solid #400106;
+}
