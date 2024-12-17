@@ -4,7 +4,7 @@ import requests
 app = Flask(__name__)
 
 # TMDb API setup
-API_KEY = "e7be137e8c2c1001674bf5a527d8253b"
+API_KEY = "API_KEY_GOES_HERE"
 BASE_URL = "https://api.themoviedb.org/3"
 IMAGE_URL = "https://image.tmdb.org/t/p/w500"
 
