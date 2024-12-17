@@ -1,29 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Top Rated Movies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieMate - Top Rated Movies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .movies-list,
+        .genre-selection {
+            margin-bottom: 20px;
+        }
+
+        .movie-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .movie-item img {
+            width: 100px;
+            height: 150px;
+            margin-right: 10px;
+        }
+
+        .genre-selection label {
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Select Movies for Recommendations</h1>
+    <h1>Select Movies</h1>
     <form action="/recommend" method="post">
-        {% for movie in top_movies %}
-            <div>
-                <input type="checkbox" name="movies" value="{{ movie.original_title }}">
-                {{ movie.original_title }}
+        <div class="movies-list">
+            <h2>Top Movies</h2>
+            {% for movie in top_movies %}
+            <div class="movie-item">
+                <img src="{{ movie.poster_path }}" alt="{{ movie.original_title }}">
+                <label>
+                    <input type="checkbox" name="movies" value="{{ movie.original_title }}">
+                    {{ movie.original_title }}
+                </label>
             </div>
-        {% endfor %}
-        
-        <div>
-            <label for="genre">What are you in the mood for?</label>
+            {% endfor %}
+        </div>
+
+        <div class="genre-selection">
+            <h2>What genre are you in the mood for?</h2>
+            <label for="genre">Genre:</label>
             <select name="genre" id="genre">
                 {% for genre in genres %}
-                    <option value="{{ genre }}">{{ genre }}</option>
+                <option value="{{ genre }}">{{ genre }}</option>
                 {% endfor %}
             </select>
         </div>
-        
-        <input type="submit" value="Get Recommendations">
+
+        <button type="submit">Get Recommendations</button>
     </form>
 </body>
+
 </html>

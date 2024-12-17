@@ -3,14 +3,52 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Movie Recommendations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieMate - Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .recommendation-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .recommendation-item img {
+            width: 100px;
+            height: 150px;
+            margin-right: 10px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 16px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
     <h1>Recommended Movies</h1>
     <ul>
         {% for movie in recommendations %}
-        <li>{{ movie }}</li>
+        <li class="recommendation-item">
+            <img src="{{ movie.poster_path }}" alt="{{ movie.original_title }}">
+            <span>{{ movie.original_title }}</span>
+        </li>
         {% endfor %}
     </ul>
     <a href="/">Back to movie list</a>
