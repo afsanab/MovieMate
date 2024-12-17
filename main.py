@@ -46,7 +46,7 @@ def get_genres():
         return {}
 
 # Fetch movies by genre
-def recommend_movies_by_genre(genre_id, top_n=10):
+def recommend_movies_by_genre(genre_id, top_n=12):
     try:
         url = f"{BASE_URL}/discover/movie?api_key={API_KEY}&with_genres={genre_id}&language=en-US&page=1"
         response = requests.get(url)
