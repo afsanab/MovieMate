@@ -5,7 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieMate - Top Rated Movies</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Rozha+One&family=Russo+One&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Zen+Dots&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 
 </head>
 <script>
@@ -21,14 +26,20 @@
         });
     });
 
+
 </script>
+<div class="header">
+    <div class="header-content">
+        <h1>MovieMate</h1>
+    </div>
+</div>
 
 <body>
     <div class="container">
-        <h1>MOVIEMATE</h1>
         <form action="/recommend" method="post">
+            <h2>Select your favorite movies to help us calculate your movie recommendations</h2>
+
             <div class="movies-list">
-                <h2>Select your favorite movies to help us calculate your movie recommendations</h2>
                 {% for movie in top_movies %}
                 <div class="movie-item">
                     <input type="checkbox" name="movies" value="{{ movie.original_title }}">

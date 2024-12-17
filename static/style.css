@@ -1,56 +1,74 @@
-/* Global Styles */
+/* General Styles */
 body {
-    font-family: 'Roboto', sans-serif;
-    color: #260101;
-    /* Dark text */
-    background-color: #D9B991;
-    /* Light background */
+    font-family: "Lora", serif;
+    color: #E3D5B8;
+    /* Warm beige text */
+    background-color: #1E1C1A;
+    /* Deep dark academia brown */
     margin: 0;
     padding: 0;
     line-height: 1.6;
 }
 
-h1,
-h2 {
-    color: #400106;
-    /* Dark red headings */
-    font-weight: 500;
-    margin-bottom: 20px;
+/* Header Section */
+.header {
+    position: relative;
+    background-image: url('header.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Containers */
+.header-content h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 5rem;
+    color: #D3B88C;
+    /* Golden beige */
+    text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.7);
+    margin: 0;
+}
+
+/* Container Styling */
 .container {
-    width: 100%;
-    margin: 0 auto;
-    padding: 20px 5%;
-    box-sizing: border-box;
-    background-color: #D9B991;
-    /* Match background */
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: #2C2926;
+    border-radius: 12px;
+    padding: 25px 20px;
+    max-width: 90%;
+    margin: 20px auto;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
 }
 
-/* Movie Items */
+/* Movie List */
 .movie-item {
     display: inline-block;
-    margin: 0 10px 20px;
-    border-radius: 8px;
-    background-color: #402814;
-    /* Rich brown */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-    cursor: pointer;
+    margin: 15px;
+    background-color: #3C332E;
+    border-radius: 10px;
     overflow: hidden;
-    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .movie-item img {
-    width: 100%;
-    max-width: 250px;
-    height: auto;
     display: block;
-    border-radius: 8px;
-    width: 100%;
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.movie-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+    border: 2px solid #A45D4E;
+    /* Deep maroon */
+}
+
+.movie-item.selected {
+    border: 3px solid #D3B88C;
+    /* Highlighted with gold */
 }
 
 /* Hide the actual checkbox */
@@ -58,97 +76,69 @@ h2 {
     display: none;
 }
 
-/* Selected Movie Item */
-.movie-item.selected {
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.7);
-    border: 3px solid #400106;
-    /* Highlight with dark red */
-    transform: translateY(-5px);
-}
-
-/* Hover Effect */
-.movie-item:hover {
-    transform: translateY(-5px);
-    border: 2px solid #0D0C00;
-}
-
 /* Buttons */
 button,
 .back-button {
-    padding: 10px 25px;
-    background-color: #402814;
-    /* Dark brown */
-    color: #D9B991;
-    /* Light text */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: "Space Mono", monospace;
+    background-color: #6C4F3D;
+    /* Warm brown */
+    color: #E3D5B8;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin-top: 30px;
+    /* Added padding above the button */
 }
+
 
 button:hover,
 .back-button:hover {
-    background-color: #400106;
-    /* Dark red on hover */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #A45D4E;
+    color: #F5F3EE;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Dropdown */
 select {
+    background-color: #3C332E;
+    color: #E3D5B8;
+    border: 1px solid #A45D4E;
     padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #0D0C00;
-    background-color: #D9B991;
-    color: #260101;
-    outline: none;
-    transition: border-color 0.3s ease;
+    border-radius: 8px;
+    font-family: "Lora", serif;
 }
 
-select:focus {
-    border-color: #400106;
-}
-
-/* Back Button */
-.back-button {
-    display: inline-block;
-    text-decoration: none;
-}
-
-/* General Links */
-a {
-    color: #260101;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: #400106;
-}
-
-/* Recommendation Items - Same Layout as Movie Items */
+/* Recommendations */
 .recommendation-item {
     display: inline-block;
-    margin: 0 10px 20px;
-    border-radius: 8px;
-    background-color: #402814;
-    /* Brown background */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-    overflow: hidden;
+    margin: 15px;
+    background-color: #3C332E;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
 }
 
 .recommendation-item img {
-    width: 100%;
-    max-width: 250px;
-    /* Matches movie-item */
-    height: auto;
-    display: block;
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
     border-radius: 8px;
 }
 
 .recommendation-item:hover {
     transform: translateY(-5px);
-    border: 2px solid #400106;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+    .header-content h1 {
+        font-size: 3rem;
+    }
+
+    .movie-item img,
+    .recommendation-item img {
+        width: 150px;
+        height: 225px;
+    }
 }
