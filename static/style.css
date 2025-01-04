@@ -50,6 +50,7 @@ body {
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    position: relative;
 }
 
 .movie-item img {
@@ -71,9 +72,25 @@ body {
     /* Highlighted with gold */
 }
 
-/* Hide the actual checkbox */
 .movie-item input[type="checkbox"] {
     display: none;
+}
+
+.movie-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    visibility: hidden;
+    z-index: 1;
+    transition: visibility 0.3s ease-in-out;
+}
+
+.movie-item.selected::before {
+    visibility: visible;
 }
 
 /* Buttons */
@@ -92,7 +109,6 @@ button,
     /* Added padding above the button */
 }
 
-
 button:hover,
 .back-button:hover {
     background-color: #A45D4E;
@@ -108,6 +124,49 @@ select {
     padding: 10px;
     border-radius: 8px;
     font-family: "Lora", serif;
+}
+
+/* Styled Input Fields for Text Questions */
+input[type="text"],
+input[type="number"] {
+    background-color: #3C332E;
+    color: #E3D5B8;
+    border: 1px solid #A45D4E;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: "Lora", serif;
+    width: calc(100% - 24px);
+    /* Adjust width for consistent padding */
+    box-sizing: border-box;
+    /* Include padding and border in width */
+    margin-bottom: 10px;
+    /* Add spacing between fields */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #D3B88C;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    outline: none;
+}
+
+/* Labels Styling */
+label {
+    font-family: "Lora", serif;
+    font-size: 1rem;
+    color: #E3D5B8;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Center text fields horizontally */
+.actor-director,
+.release-year,
+.language,
+.duration {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 /* Recommendations */
