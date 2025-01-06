@@ -64,6 +64,3 @@ To run this project locally:
 
 ## Credits
 This project is developed by [Afsana Bhuiyan](https://github.com/afsanab) and [Nadia Choudhury](https://github.com/nadiachoudhury) and leverages the [TMDb API](https://www.themoviedb.org/) for data.
-
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
