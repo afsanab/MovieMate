@@ -8,6 +8,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
+
 # TMDb API setup
 API_KEY = os.getenv('TMDB_API_KEY')  # Load API key from environment variable
 BASE_URL = "https://api.themoviedb.org/3"
@@ -129,5 +130,7 @@ def recommend():
     )
     return render_template('recommendations.html', recommendations=recommendations)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, host="0.0.0.0", port=port)
