@@ -8,30 +8,92 @@ load_dotenv()
 
 app = Flask(__name__)
 
-
 # TMDb API setup
 API_KEY = os.getenv('TMDB_API_KEY')  # Load API key from environment variable
 BASE_URL = "https://api.themoviedb.org/3"
 IMAGE_URL = "https://image.tmdb.org/t/p/w500"
 
 # Fetch top-rated movies
-def get_top_rated_movies(top_n=12):
+def get_top_rated_movies(top_n=24):
     try:
-        url = f"{BASE_URL}/movie/top_rated?api_key={API_KEY}&language=en-US&page=1"
-        response = requests.get(url)
-        response.raise_for_status()
-        data = response.json()
+        total_movies = []
+        page = 1
 
-        return [
-            {
-                "original_title": movie["title"],
-                "poster_path": IMAGE_URL + movie["poster_path"] if movie["poster_path"] else "",
-                "rating": movie["vote_average"]
-            }
-            for movie in data["results"][:top_n]
-        ]
+        while len(total_movies) < top_n:
+            url = f"{BASE_URL}/movie/top_rated?api_key={API_KEY}&page={page}"
+            response = requests.get(url)
+            response.raise_for_status()
+            data = response.json()
+
+            total_movies.extend([
+                {
+                    "original_title": movie["title"],
+                    "poster_path": IMAGE_URL + movie["poster_path"] if movie["poster_path"] else "",
+                    "rating": movie["vote_average"]
+                }
+                for movie in data["results"]
+            ])
+
+            if not data["results"] or page >= data["total_pages"]:
+                break
+
+            page += 1
+
+        return total_movies[:top_n]
     except Exception as e:
         print(f"Error fetching top-rated movies: {e}")
+        return []
+
+# Fetch popular movies
+def get_popular_movies(top_n=24):
+    try:
+        total_movies = []
+        page = 1
+
+        while len(total_movies) < top_n:
+            url = f"{BASE_URL}/movie/popular?api_key={API_KEY}&page={page}"
+            response = requests.get(url)
+            response.raise_for_status()
+            data = response.json()
+
+            total_movies.extend([
+                {
+                    "original_title": movie["title"],
+                    "poster_path": IMAGE_URL + movie["poster_path"] if movie["poster_path"] else "",
+                    "rating": movie["vote_average"],
+                    "popularity": movie["popularity"]
+                }
+                for movie in data["results"]
+            ])
+
+            if not data["results"] or page >= data["total_pages"]:
+                break
+
+            page += 1
+
+        return total_movies[:top_n]
+    except Exception as e:
+        print(f"Error fetching popular movies: {e}")
+        return []
+
+# Combine top-rated and popular movies
+def get_combined_movies(top_n=48):
+    try:
+        top_rated_movies = get_top_rated_movies(top_n)
+        popular_movies = get_popular_movies(top_n)
+
+        # Combine movies, removing duplicates by title
+        combined_movies = {movie["original_title"]: movie for movie in top_rated_movies}
+        for movie in popular_movies:
+            if movie["original_title"] not in combined_movies:
+                combined_movies[movie["original_title"]] = movie
+
+        # Split the list evenly
+        combined_movies = list(combined_movies.values())
+        half_n = top_n // 2
+        return combined_movies[:half_n] + combined_movies[half_n:half_n * 2]
+    except Exception as e:
+        print(f"Error combining movies: {e}")
         return []
 
 # Fetch genres
@@ -57,7 +119,7 @@ def recommend_movies(preferred_genre_id, selected_movie_titles, rating, language
             "with_runtime.gte": duration[0],
             "with_runtime.lte": duration[1],
             "language": "en-US",
-            "sort_by": popularity,  # "popularity.desc" for blockbusters, "popularity.asc" for hidden gems
+            "sort_by": popularity,
             "with_original_language": language,
             "release_date.gte": release_year_range[0],
             "release_date.lte": release_year_range[1],
@@ -98,7 +160,7 @@ def recommend_movies(preferred_genre_id, selected_movie_titles, rating, language
 
 @app.route('/')
 def index():
-    top_movies = get_top_rated_movies()
+    top_movies = get_combined_movies()
     genres = get_genres()
     return render_template('index.html', top_movies=top_movies, genres=genres.keys())
 
@@ -131,6 +193,5 @@ def recommend():
     return render_template('recommendations.html', recommendations=recommendations)
 
 if __name__ == "__main__":
-    import os
     port = int(os.environ.get("PORT", 5000))
     app.run(debug=False, host="0.0.0.0", port=port)
